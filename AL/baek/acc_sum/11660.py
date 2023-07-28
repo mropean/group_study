@@ -9,8 +9,11 @@ temp_list = [ [0] * (n+1) for _ in range(n+1) ]
 for i in range(1, n+1):
     for j in range(1, n+1):
         temp_list[i][j] = temp_list[i][j-1] + temp_list[i-1][j] - temp_list[i-1][j-1]  + num_list[i-1][j-1]
+        #print(f"({i},{j-1}){temp_list[i][j-1]} + ({i-1},{j}){temp_list[i-1][j]} - ({i-1},{j-1}){temp_list[i-1][j-1]} + ({i-1},{j-1}){num_list[i-1][j-1]} = ({i},{j}){temp_list[i][j]}")
 
+print()
 for _ in range(m):
     x1, y1, x2, y2 = map(int, input().split())
     res = temp_list[x2][y2] - temp_list[x2][y1-1] - temp_list[x1-1][y2] + temp_list[x1-1][y1-1]
+    #print(f"({x2},{y2}){temp_list[x2][y2]} - ({x2},{y1-1}){temp_list[x2][y1-1]} - ({x1-1},{y2}){temp_list[x1-1][y2]} + ({x1-1},{y1-1}){temp_list[x1-1][y1-1]}")
     print(res)
