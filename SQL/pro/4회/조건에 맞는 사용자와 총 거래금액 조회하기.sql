@@ -1,0 +1,17 @@
+-- 코드를 입력하세요
+SELECT
+WRITER_ID, NICKNAME, SUM(PRICE)
+from
+USED_GOODS_BOARD
+    inner join 
+    USED_GOODS_USER
+    on
+    USED_GOODS_BOARD.WRITER_ID = USED_GOODS_USER.USER_ID
+where
+USED_GOODS_BOARD.STATUS = "DONE"
+group by
+WRITER_ID
+having
+SUM(PRICE) >= 700000
+order by
+SUM(PRICE);

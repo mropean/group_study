@@ -1,0 +1,19 @@
+-- 코드를 입력하세요
+SELECT
+R1.FOOD_TYPE, R1.REST_ID, R1.REST_NAME, R1.FAVORITES
+from
+REST_INFO R1, 
+(
+    select
+    FOOD_TYPE, MAX(FAVORITES) as "FAVORITES"
+    from
+    REST_INFO
+    group by
+    FOOD_TYPE
+) as R2
+where
+R1.FOOD_TYPE = R2.FOOD_TYPE
+and
+R1.FAVORITES = R2.FAVORITES
+order by
+R1.FOOD_TYPE desc;
