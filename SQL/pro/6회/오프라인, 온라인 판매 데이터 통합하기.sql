@@ -1,0 +1,29 @@
+-- 코드를 입력하세요
+with FULL_DATA as(
+    SELECT
+    SALES_DATE, PRODUCT_ID, USER_ID, SALES_AMOUNT
+    from
+    ONLINE_SALE
+    where
+    YEAR(SALES_DATE) = 2022
+    and
+    MONTH(SALES_DATE) = 3
+    UNION ALL
+    SELECT
+    SALES_DATE, PRODUCT_ID, NULL as "USER_ID", SALES_AMOUNT
+    from
+    OFFLINE_SALE
+    where
+    YEAR(SALES_DATE) = 2022
+    and
+    MONTH(SALES_DATE) = 3
+)
+
+select
+date_format(SALES_DATE, "%Y-%m-%d") as SALES_DATE, PRODUCT_ID, 
+USER_ID, SALES_AMOUNT
+from
+FULL_DATA
+order by
+SALES_DATE, PRODUCT_ID, USER_ID
+;

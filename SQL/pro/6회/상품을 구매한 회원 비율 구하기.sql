@@ -1,0 +1,36 @@
+-- 코드를 입력하세요
+with YEAR_MEMBER as(
+    SELECT
+    USER_ID
+    from
+    USER_INFO
+    where
+    YEAR(JOINED) = 2021
+),
+NUM_MEMBER as(
+    select
+    COUNT(*) as "MEMBES_COUNT"
+    from
+    YEAR_MEMBER
+),
+BUY_MEMBER as(
+    select
+    YEAR(SALES_DATE) as "YEAR", MONTH(SALES_DATE) as "MONTH", 
+    COUNT(DISTINCT ONLINE_SALE.USER_ID) as "PUCHASED_USERS"
+    from
+    ONLINE_SALE
+        join
+        YEAR_MEMBER
+        on
+        ONLINE_SALE.USER_ID = YEAR_MEMBER.USER_ID
+    group by
+    YEAR(SALES_DATE), MONTH(SALES_DATE)
+)
+
+select
+YEAR, MONTH, PUCHASED_USERS, ROUND(PUCHASED_USERS/MEMBES_COUNT, 1) as "PUCHASED_RATIO"
+from
+BUY_MEMBER, NUM_MEMBER
+order by
+YEAR, MONTH
+;
