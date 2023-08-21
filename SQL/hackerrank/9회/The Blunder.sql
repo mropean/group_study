@@ -1,0 +1,4 @@
+select
+CEIL(AVG(Salary) - AVG(CAST(REPLACE(CAST(Salary AS CHAR), '0', '') AS UNSIGNED INTEGER)))
+from
+EMPLOYEES
