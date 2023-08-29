@@ -1,0 +1,10 @@
+select
+CONTINENT, FLOOR(AVG(CITY.POPULATION))
+from
+COUNTRY
+    inner join
+    CITY
+    on
+    COUNTRY.CODE = CITY.COUNTRYCODE
+group by
+CONTINENT
